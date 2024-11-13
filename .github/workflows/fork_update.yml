@@ -36,5 +36,5 @@ jobs:
         if: steps.check_ahead.outputs.ahead != '0'
         run: |
           curl -X POST -H "Content-Type: application/json" \
-          -d "{\"text\": \"Your fork is behind by ${AHEAD_COMMITS} commits.\"}" \
+          -d "{\"content\": \"🔄 **Your fork is behind by ${AHEAD_COMMITS} commits!**\nIt's time to sync with the upstream repository.\"}" \
           ${{ secrets.WEBHOOK_URL }}
