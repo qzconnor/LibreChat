@@ -108,6 +108,7 @@ export default {
   com_assistants_conversation_starters: 'Conversation Starters',
   com_assistants_conversation_starters_placeholder: 'Enter a conversation starter',
   com_sidepanel_agent_builder: 'Agent Builder',
+  com_ui_custom_settings: 'open mail suggestion from chat in AMS',
   com_agents_name_placeholder: 'Optional: The name of the agent',
   com_agents_description_placeholder: 'Optional: Describe your Agent here',
   com_agents_instructions_placeholder: 'The system instructions that the agent uses',

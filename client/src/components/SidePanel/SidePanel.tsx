@@ -16,6 +16,7 @@ import { cn, getEndpointField } from '~/utils';
 import { useChatContext } from '~/Providers';
 import Switcher from './Switcher';
 import Nav from './Nav';
+import { DotsIcon } from '~/components/svg';
 
 interface SidePanelProps {
   defaultLayout?: number[] | undefined;
@@ -113,7 +114,18 @@ const SidePanel = ({
     assistants,
     keyProvided,
     endpointType,
+    // @ts-ignore
     interfaceConfig,
+    customLinks: [
+      {
+        id: 'custom-settings',
+        title: 'com_ui_custom_settings', // localizeKey
+        icon: DotsIcon,
+        onClick: () => {
+          alert(conversation?.conversationId);
+        },
+      },
+    ],
   });
 
   const calculateLayout = useCallback(() => {
