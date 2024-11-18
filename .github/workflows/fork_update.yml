@@ -1,0 +1,40 @@
+name: Check for Upstream Updates
+
+on:
+  schedule:
+    - cron: '0 0 * * 0' # Runs daily; adjust as needed
+  workflow_dispatch: # Allows manual triggering of the workflow
+
+jobs:
+  check-for-updates:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout the forked repository
+        uses: actions/checkout@v2
+        with:
+          persist-credentials: false
+
+      - name: Add upstream repository
+        run: git remote add upstream https://github.com/danny-avila/LibreChat.git
+
+      - name: Fetch upstream
+        run: git fetch upstream
+
+      - name: Check if fork is behind upstream
+        id: check_ahead
+        run: |
+          UPSTREAM_BRANCH="main"  # Change if your upstream default branch is different
+          FORK_BRANCH="main"       # Change if your fork default branch is different
+          UPSTREAM_REV=$(git rev-parse upstream/$UPSTREAM_BRANCH)
+          FORK_REV=$(git rev-parse $FORK_BRANCH)
+          AHEAD_COMMITS=$(git rev-list --count $FORK_REV..$UPSTREAM_REV)
+
+          echo "::set-output name=ahead::$AHEAD_COMMITS"
+
+      - name: Send Webhook if Behind
+        if: steps.check_ahead.outputs.ahead != '0'
+        run: |
+          curl -X POST -H "Content-Type: application/json" \
+          -d "{\"content\": \"🔄 **Your fork is behind by ${AHEAD_COMMITS} commits!**\nIt's time to sync with the upstream repository.\"}" \
+          ${{ secrets.WEBHOOK_URL }}
