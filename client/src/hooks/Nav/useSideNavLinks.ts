@@ -27,6 +27,7 @@ export default function useSideNavLinks({
   endpoint,
   endpointType,
   interfaceConfig,
+  customLinks,
 }: {
   hidePanel: () => void;
   assistants?: TConfig | null;
@@ -35,6 +36,7 @@ export default function useSideNavLinks({
   endpoint?: EModelEndpoint | null;
   endpointType?: EModelEndpoint | null;
   interfaceConfig: Partial<TInterfaceConfig>;
+  customLinks?: NavLink[];
 }) {
   const hasAccessToPrompts = useHasAccess({
     permissionType: PermissionTypes.PROMPTS,
@@ -129,6 +131,10 @@ export default function useSideNavLinks({
       });
     }
 
+    if(customLinks) {
+      links.push(...customLinks);
+    }
+
     links.push({
       title: 'com_sidepanel_hide_panel',
       label: '',
@@ -150,6 +156,7 @@ export default function useSideNavLinks({
     hasAccessToBookmarks,
     hasAccessToCreateAgents,
     hidePanel,
+    customLinks,
   ]);
 
   return Links;
