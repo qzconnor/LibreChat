@@ -126,7 +126,7 @@ const CreatePromptForm = ({
                 </div>
               )}
             />
-            <CategorySelector tabIndex={0} />
+            <CategorySelector className='w-48 md:w-64' tabIndex={0} />
           </div>
         </div>
         <div className="flex w-full flex-col gap-4 md:mt-[1.075rem]">
