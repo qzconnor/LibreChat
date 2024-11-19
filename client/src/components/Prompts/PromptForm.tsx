@@ -244,7 +244,7 @@ const PromptForm = () => {
             )}
             <div className="flex h-10 flex-row gap-x-2">
               <CategorySelector
-                className="w-48 md:w-56"
+                className="w-48 md:w-64"
                 currentCategory={group.category}
                 onValueChange={(value) =>
                   updateGroupMutation.mutate({
