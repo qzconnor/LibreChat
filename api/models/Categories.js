@@ -6,41 +6,57 @@ const options = [
     value: '',
   },
   {
-    label: 'idea',
-    value: 'idea',
+    label: 'customer_clerk',
+    value: 'customer_clerk',
   },
   {
-    label: 'travel',
-    value: 'travel',
+    label: 'contract_clerk',
+    value: 'contract_clerk',
   },
   {
-    label: 'teach_or_explain',
-    value: 'teach_or_explain',
+    label: 'damage_clerk',
+    value: 'damage_clerk',
   },
   {
-    label: 'write',
-    value: 'write',
+    label: 'salesperson',
+    value: 'salesperson',
   },
-  {
-    label: 'shop',
-    value: 'shop',
-  },
-  {
-    label: 'code',
-    value: 'code',
-  },
-  {
-    label: 'misc',
-    value: 'misc',
-  },
-  {
-    label: 'roleplay',
-    value: 'roleplay',
-  },
-  {
-    label: 'finance',
-    value: 'finance',
-  },
+  // {
+  //   label: 'idea',
+  //   value: 'idea',
+  // },
+  // {
+  //   label: 'travel',
+  //   value: 'travel',
+  // },
+  // {
+  //   label: 'teach_or_explain',
+  //   value: 'teach_or_explain',
+  // },
+  // {
+  //   label: 'write',
+  //   value: 'write',
+  // },
+  // {
+  //   label: 'shop',
+  //   value: 'shop',
+  // },
+  // {
+  //   label: 'code',
+  //   value: 'code',
+  // },
+  // {
+  //   label: 'misc',
+  //   value: 'misc',
+  // },
+  // {
+  //   label: 'roleplay',
+  //   value: 'roleplay',
+  // },
+  // {
+  //   label: 'finance',
+  //   value: 'finance',
+  // },
 ];
 
 module.exports = {
