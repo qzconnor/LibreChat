@@ -743,6 +743,7 @@ export default {
   // com_ui_finance: 'Finance',
   // com_ui_code: 'Code',
   // com_ui_travel: 'Travel',
+  com_ui_send_to_ams: 'Send to AMS',
   com_ui_customer_clerk: 'Customer-Clerk',
   com_ui_contract_clerk: 'Contract-Clerk',
   com_ui_damage_clerk: 'Damage-Clerk',
