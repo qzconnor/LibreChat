@@ -12,6 +12,7 @@ import SubRow from '~/components/Chat/Messages/SubRow';
 import { useMessageActions } from '~/hooks';
 import { cn, logger } from '~/utils';
 import store from '~/store';
+import { ArrowRightIcon, ClipboardCopyIcon } from 'lucide-react';
 
 type MessageRenderProps = {
   message?: TMessage;
@@ -160,6 +161,21 @@ const MessageRender = memo(
                 handleContinue={handleContinue}
                 latestMessage={latestMessage}
                 isLast={isLast}
+                customButtons={[
+                  {
+                    title: 'send_to_ams',
+                    icon: ArrowRightIcon,
+                    onClick: () => alert('Send to AMS'),
+                  }, {
+                    title: 'send_to_ams',
+                    icon: ArrowRightIcon,
+                    onClick: () => alert('Send to AMS 2'),
+                  }, {
+                    title: 'send_to_ams',
+                    icon: ArrowRightIcon,
+                    onClick: () => alert('Send to AMS 3'),
+                  },
+                ]}
               />
             </SubRow>
           )}
