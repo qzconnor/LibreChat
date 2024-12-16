@@ -508,6 +508,14 @@ export type TStartupConfig = {
 export const configSchema = z.object({
   version: z.string(),
   cache: z.boolean().default(true),
+  token_store: z.object({
+    enabled: z.boolean().default(false),
+    domains: z.array(z.object({
+      name: z.string(),
+      OPENAI: z.string().optional(),
+      AZURE: z.string().optional(),
+    })),
+  }),
   secureImageLinks: z.boolean().optional(),
   imageOutputType: z.nativeEnum(EImageOutputType).default(EImageOutputType.PNG),
   includedTools: z.array(z.string()).optional(),
