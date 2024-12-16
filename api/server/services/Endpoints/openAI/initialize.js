@@ -9,6 +9,8 @@ const { getLLMConfig } = require('~/server/services/Endpoints/openAI/llm');
 const { isEnabled, isUserProvided } = require('~/server/utils');
 const { getAzureCredentials } = require('~/utils');
 const { OpenAIClient } = require('~/app');
+const { getCustomConfig } = require('~/server/services/Config');
+// const { logger } = require('~/config');
 
 const initializeClient = async ({
   req,
@@ -27,14 +29,41 @@ const initializeClient = async ({
     OPENAI_SUMMARIZE,
     DEBUG_OPENAI,
   } = process.env;
-  const { key: expiresAt } = req.body;
+  const { key: expiresAt, ...rest } = req.body;
   const modelName = overrideModel ?? req.body.model;
   const endpoint = overrideEndpoint ?? req.body.endpoint;
   const contextStrategy = isEnabled(OPENAI_SUMMARIZE) ? 'summarize' : null;
 
+  const customConfig = await getCustomConfig();
+  const keys = {};
+
+  if(customConfig.token_store.enabled) {;
+    const domain = req.user.email ? req.user.email.split('@')[1] : null;
+
+    if(!domain) {
+      throw new Error('User email is not provided');
+    }
+    const foundDomain = customConfig.token_store.domains.find(d => d.name === domain);
+    if(!foundDomain) {
+      throw new Error('Domain not found');
+    }
+    keys.OPENAI_API_KEY = process.env[foundDomain.OPENAI] || foundDomain.OPENAI;
+    keys.AZURE_API_KEY = process.env[foundDomain.AZURE] || foundDomain.AZURE;
+  }else {
+    keys.OPENAI_API_KEY = OPENAI_API_KEY;
+    keys.AZURE_API_KEY = AZURE_API_KEY;
+  }
+  console.log(rest);
+
+  // console.log('customConfig', customConfig);
+  // console.log(req.user);
+  // const keys = {
+  //   OPENAI_API_KEY: customConfig.token_store.enabled ? customConfig.token_store. : OPENAI_API_KEY,
+  // }
+
   const credentials = {
-    [EModelEndpoint.openAI]: OPENAI_API_KEY,
-    [EModelEndpoint.azureOpenAI]: AZURE_API_KEY,
+    [EModelEndpoint.openAI]: keys.OPENAI_API_KEY,
+    [EModelEndpoint.azureOpenAI]: keys.AZURE_API_KEY,
   };
 
   const baseURLOptions = {
