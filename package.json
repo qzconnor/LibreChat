@@ -82,6 +82,7 @@
   "devDependencies": {
     "@axe-core/playwright": "^4.9.1",
     "@playwright/test": "^1.38.1",
+    "@types/showdown": "^2.0.6",
     "@typescript-eslint/eslint-plugin": "^5.62.0",
     "@typescript-eslint/parser": "^5.62.0",
     "cross-env": "^7.0.3",
@@ -129,5 +130,8 @@
       "admin/",
       "packages/"
     ]
+  },
+  "dependencies": {
+    "showdown": "^2.1.0"
   }
 }
