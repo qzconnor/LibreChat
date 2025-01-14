@@ -11,7 +11,7 @@ import { LucideProps } from 'lucide-react';
 
 type TCustomButtom = {
   title: string;
-  onClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
+  onClick: (e: React.MouseEvent<HTMLButtonElement>) => void | Promise<void>;
   icon: React.ForwardRefExoticComponent<Omit<LucideProps, 'ref'> & React.RefAttributes<SVGSVGElement>>;
 }
 type THoverButtons = {
