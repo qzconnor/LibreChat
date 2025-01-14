@@ -784,7 +784,7 @@ export default {
   com_click_to_download: '(hier klicken zum Herunterladen)',
   com_download_expires: '(hier klicken zum Herunterladen - läuft ab am {0})',
   com_sidepanel_agent_builder: 'Agenten Ersteller',
-  com_ui_custom_settings: 'Mailvorschlag aus chat im AMS öffnen',
+  com_ui_custom_settings: 'Chat Revisionssicher speichern (?)',
   com_assistants_conversation_starters_placeholder: 'Gib einen Gesprächseinstieg ein',
   com_agents_name_placeholder: 'Optional: Der Name des Agenten',
   com_assistants_conversation_starters: 'Gesprächseinstiege',

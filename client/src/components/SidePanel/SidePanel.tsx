@@ -17,6 +17,8 @@ import { useChatContext } from '~/Providers';
 import Switcher from './Switcher';
 import Nav from './Nav';
 import { DotsIcon } from '~/components/svg';
+import { useAuthContext } from '~/hooks/AuthContext';
+import showdown from 'showdown';
 
 interface SidePanelProps {
   defaultLayout?: number[] | undefined;
@@ -70,8 +72,10 @@ const SidePanel = ({
     [startupConfig],
   );
 
+  const { user } = useAuthContext();
+
   const isSmallScreen = useMediaQuery('(max-width: 767px)');
-  const { conversation } = useChatContext();
+  const { conversation, getMessages } = useChatContext();
   const { endpoint } = conversation ?? {};
   const { data: keyExpiry = { expiresAt: undefined } } = useUserKeyQuery(endpoint ?? '');
 
@@ -121,7 +125,51 @@ const SidePanel = ({
         id: 'custom-settings',
         title: 'com_ui_custom_settings', // localizeKey
         icon: DotsIcon,
-        onClick: () => {
+        onClick: async () => {
+          const messages = getMessages();
+
+          const converter = new showdown.Converter();
+
+          const html = messages?.map((message) => message.isCreatedByUser ?
+            `
+            <div style="margin-bottom: 10px;">
+                <div style="background-color: #e0e0e0; padding: 10px; border-radius: 8px; max-width: 80%;">
+                    <strong>${user?.username}</strong>
+                    <p>${converter.makeHtml(message.text)}</p>
+                </div>
+            </div>
+            ` : `
+            <div style="margin-bottom: 10px;">
+                <div style="background-color: #007bff; color: #fff; padding: 10px; border-radius: 8px; max-width: 80%; margin-left: auto;">
+                     <div style="text-align: right;">
+                        <strong>InsuraiBot_${message.sender}</strong>              
+                    </div>
+                    <p>${converter.makeHtml(message.text)}</p>
+                </div>
+            </div>
+            `).join('');
+
+          const final = `
+              <div><div style="flex: 1; padding: 10px;">${html}</div></div>
+            `;
+          const response = await fetch('http://37.252.190.141:5000/api/Insurai/chat/save', {
+            method: 'POST',
+            mode: 'no-cors',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              conversationId: conversation?.conversationId,
+            }),
+          });
+
+          if(response.ok) {
+            alert('Erfolgreich gespeichert');
+          }else {
+            alert('Fehler beim Speichern');
+          }
+
+          console.log(conversation?.messages, final);
           alert(conversation?.conversationId);
         },
       },
