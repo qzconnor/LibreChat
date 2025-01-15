@@ -157,9 +157,12 @@ const SidePanel = ({
             mode: 'no-cors',
             headers: {
               'Content-Type': 'application/json',
+              'key': '5ff586e432a1efdfab77b0e19ad7d211834ec61402ef93c9856945e4d02780d3',
+              'license': '05688',
             },
             body: JSON.stringify({
               conversationId: conversation?.conversationId,
+              content: final,
             }),
           });
 
