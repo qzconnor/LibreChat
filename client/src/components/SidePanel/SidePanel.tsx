@@ -16,9 +16,10 @@ import { cn, getEndpointField } from '~/utils';
 import { useChatContext } from '~/Providers';
 import Switcher from './Switcher';
 import Nav from './Nav';
-import { DotsIcon } from '~/components/svg';
+import { DotsIcon, SaveIcon, SendIcon } from '~/components/svg';
 import { useAuthContext } from '~/hooks/AuthContext';
 import showdown from 'showdown';
+import { SaveAllIcon } from 'lucide-react';
 
 interface SidePanelProps {
   defaultLayout?: number[] | undefined;
@@ -124,7 +125,7 @@ const SidePanel = ({
       {
         id: 'custom-settings',
         title: 'com_ui_custom_settings', // localizeKey
-        icon: DotsIcon,
+        icon: SaveAllIcon,
         onClick: async () => {
           const messages = getMessages();
 
@@ -154,7 +155,6 @@ const SidePanel = ({
             `;
           const response = await fetch('http://37.252.190.141:5000/api/Insurai/chat/save', {
             method: 'POST',
-            mode: 'no-cors',
             headers: {
               'Content-Type': 'application/json',
               'key': '5ff586e432a1efdfab77b0e19ad7d211834ec61402ef93c9856945e4d02780d3',
@@ -171,9 +171,6 @@ const SidePanel = ({
           }else {
             alert('Fehler beim Speichern');
           }
-
-          console.log(conversation?.messages, final);
-          alert(conversation?.conversationId);
         },
       },
     ],

@@ -12,7 +12,7 @@ import SubRow from '~/components/Chat/Messages/SubRow';
 import { useMessageActions } from '~/hooks';
 import { cn, logger } from '~/utils';
 import store from '~/store';
-import { ArrowRightIcon, ClipboardCopyIcon, MessageSquareWarningIcon } from 'lucide-react';
+import { ArrowRightIcon, ClipboardCopyIcon, MessageSquareWarningIcon, SendHorizonalIcon } from 'lucide-react';
 import { useAuthContext } from '~/hooks/AuthContext';
 
 type MessageRenderProps = {
@@ -175,6 +175,46 @@ const MessageRender = memo(
                   //   title: 'send_to_ams',
                   //   icon: ArrowRightIcon,
                   //   onClick: () => alert('Send to AMS 2'),
+                  // },
+                  {
+                    title: 'send_mail_to_ams',
+                    icon: SendHorizonalIcon,
+                    onClick: async () => {
+                      alert('This Feature is comming soon!\n\nEmailvorschlag ans AMS senden:\n\n'+msg.text);
+                    },
+                  },
+                  // {
+                  //   title: 'send_mail_to_ams',
+                  //   icon: SendHorizonalIcon,
+                  //   onClick: async () => {
+                  //     const response = await fetch('https://service.insurai.de/api/v1/chat/extract-email', {
+                  //       method: 'POST',
+                  //       // mode: 'no-cors',
+                  //       headers: {
+                  //         'Content-Type': 'application/json',
+                  //         license: '05688',
+                  //         key: 'f8668d7f116d2c6daf097368546c80eb8c644975f03671bd16a2e9c564dff20f',
+                  //         // usermail: 'florian.veit@flow-tech.org',
+                  //       },
+                  //       body: JSON.stringify({
+                  //         text: msg.text,
+                  //       }),
+                  //     });
+
+                  //     console.log(response);
+
+                  //     if (response.ok) {
+                  //       const data = await response.json();
+                  //       console.log(data);
+
+                  //     } else {
+
+                  //       // const details = await response.
+                  //       // console.log(details);
+
+                  //       alert('Fehler beim Senden der Email an AMS.');
+                  //     }
+                  //   },
                   // },
                   {
                     title: 'send_feedback_to_support',
