@@ -166,6 +166,7 @@ const MessageRender = memo(
             <div className="flex max-w-full flex-grow flex-col gap-0">
               <MessageContext.Provider
                 value={{
+                  isExpanded: false,
                   messageId: msg.messageId,
                   conversationId: conversation?.conversationId,
                 }}
@@ -209,104 +210,6 @@ const MessageRender = memo(
                 handleContinue={handleContinue}
                 latestMessage={latestMessage}
                 isLast={isLast}
-                customButtons={[
-                  // {
-                  //   title: 'send_to_ams',
-                  //   icon: ArrowRightIcon,
-                  //   onClick: () => {
-                  //     msg.text
-                  //   }
-                  // }, {
-                  //   title: 'send_to_ams',
-                  //   icon: ArrowRightIcon,
-                  //   onClick: () => alert('Send to AMS 2'),
-                  // },
-                  {
-                    title: 'send_mail_to_ams',
-                    icon: SendHorizonalIcon,
-                    onClick: async () => {
-                      alert('This Feature is comming soon!\n\nEmailvorschlag ans AMS senden:\n\n'+msg.text);
-                    },
-                  },
-                  // {
-                  //   title: 'send_mail_to_ams',
-                  //   icon: SendHorizonalIcon,
-                  //   onClick: async () => {
-                  //     const response = await fetch('https://service.insurai.de/api/v1/chat/extract-email', {
-                  //       method: 'POST',
-                  //       // mode: 'no-cors',
-                  //       headers: {
-                  //         'Content-Type': 'application/json',
-                  //         license: '05688',
-                  //         key: 'f8668d7f116d2c6daf097368546c80eb8c644975f03671bd16a2e9c564dff20f',
-                  //         // usermail: 'florian.veit@flow-tech.org',
-                  //       },
-                  //       body: JSON.stringify({
-                  //         text: msg.text,
-                  //       }),
-                  //     });
-
-                  //     console.log(response);
-
-                  //     if (response.ok) {
-                  //       const data = await response.json();
-                  //       console.log(data);
-
-                  //     } else {
-
-                  //       // const details = await response.
-                  //       // console.log(details);
-
-                  //       alert('Fehler beim Senden der Email an AMS.');
-                  //     }
-                  //   },
-                  // },
-                  {
-                    title: 'send_feedback_to_support',
-                    icon: MessageSquareWarningIcon,
-                    onClick: async () => {
-
-                      const response = await fetch('https://aizpun.webhook.office.com/webhookb2/ab3adddd-9ce9-431a-8972-374ba7b510c3@92c587dd-51e5-406e-888f-3223791e4afe/IncomingWebhook/78f012b8e0564b1581b34c24c22661e6/380d7776-6d22-4778-a4ab-b92e004adfc4/V2SeiJ5UPBDOX1x_w37M84QK_Kh3h3OmJiSr7ETADVeQs1', {
-                        method: 'POST',
-                        mode: 'no-cors',
-                        body: JSON.stringify({
-                          '@type': 'MessageCard',
-                          '@context': 'http://schema.org/extensions',
-                          'themeColor': 'FF5555',
-                          'summary': 'Notification Card',
-                          'sections': [
-                            {
-                              'activityTitle': 'Nutzer: **' + user?.email + '**',
-                              // 'activitySubtitle': 'Here is a brief description of the event or information.',
-                              'markdown': true,
-                              // 'text': 'A sample event occurred, and here are the details:',
-                              'facts': [
-                                {
-                                  'name': 'Beschreibung',
-                                  'value': 'Ein Fehler ist aufgetreten.',
-                                },
-                                {
-                                  'name': 'Chat-ID',
-                                  'value': conversation?.conversationId,
-                                },
-                              ],
-                            },
-                            {
-                              'text': msg.text,
-                              'markdown': true,
-                            },
-                          ],
-                        },
-                        ),
-                      });
-                      if(response.ok){
-                        alert('Feedback wurde an den Support gesendet.');
-                      }else {
-                        alert('Fehler beim Senden des Feedbacks.');
-                      }
-                    },
-                  },
-                ]}
                 customButtons={[
                   // {
                   //   title: 'send_to_ams',
